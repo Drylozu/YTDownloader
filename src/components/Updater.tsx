@@ -63,7 +63,7 @@ const Loader = styled.div`
   }
 `;
 
-const file = (await type()) === 'Windows_NT' ? 'youtube-dl.exe' : 'youtube-dl';
+const file = (await type()) === 'Windows_NT' ? 'yt-dlp.exe' : 'yt-dlp';
 
 export function Updater({ onReady }: { onReady(): void }) {
   const [info, setInfo] = useState('buscando actualizaciones...');
@@ -74,9 +74,7 @@ export function Updater({ onReady }: { onReady(): void }) {
     setInfo('obteniendo versiones de YTDL recientes');
 
     const res = await axios
-      .get<any>(
-        'https://api.github.com/repos/ytdl-org/youtube-dl/releases/latest'
-      )
+      .get<any>('https://api.github.com/repos/yt-dlp/yt-dlp/releases/latest')
       .catch(() => null);
     if (!res) return onReady();
     if (settings.YTDLTag === res.data.tag_name) return onReady();

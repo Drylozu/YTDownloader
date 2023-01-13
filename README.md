@@ -1,7 +1,10 @@
-# Tauri + React + Typescript
+# YT Downloader
+YT Downloader is a tool that facilitates the use of ytdl (especially a fork, [yt-dlp](https://github.com/yt-dlp/yt-dlp)) with a GUI.
+Focused on personal use, this tool can be used to search, download and play YouTube videos.
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+Status: **In Development**.
 
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+## Technologies
+- Rust
+- Tauri
+- React w/ Vite

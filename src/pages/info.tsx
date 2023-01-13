@@ -45,7 +45,7 @@ export function Info() {
         <Data>
           {systemInfo[0]} {systemInfo[1]} ({systemInfo[2]} {systemInfo[3]})
         </Data>
-        <Data>ytdl-org/youtube-dl: {settings.YTDLTag}</Data>
+        <Data>yt-dlp/yt-dlp: {settings.YTDLTag}</Data>
       </Col>
       <Subtitle>Acerca de {appInfo[0]}</Subtitle>
       <Data>
