@@ -1,6 +1,5 @@
 import ReactDropdown from 'react-dropdown';
-import styled, { createGlobalStyle } from 'styled-components';
-import { useState } from 'react';
+import styled from 'styled-components';
 
 import 'react-dropdown/style.css';
 
@@ -26,7 +25,7 @@ const Inline = styled.div`
   align-items: center;
 `;
 
-const RDropdown = styled(ReactDropdown)`
+export const RDropdown = styled(ReactDropdown)`
   flex: 0.25 1 auto;
 
   & > .Dropdown-control {

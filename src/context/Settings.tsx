@@ -36,7 +36,7 @@ const defaultState: SettingsManager = {
     downloadsDir: await downloadDir(),
     background: true,
     theme: 'dark',
-    lastYTDLCheck: Date.now(),
+    lastYTDLCheck: new Date("2000").getTime(),
     YTDLTag: '',
   },
   loaded: false,
@@ -60,7 +60,10 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
 
     if (!(await exists('config.json', { dir: BaseDirectory.AppConfig })))
       await writeTextFile(
-        { path: 'config.json', contents: JSON.stringify(defaultState) },
+        {
+          path: 'config.json',
+          contents: JSON.stringify(defaultState.settings),
+        },
         {
           dir: BaseDirectory.AppConfig,
         }

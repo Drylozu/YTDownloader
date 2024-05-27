@@ -26,22 +26,22 @@ const Center = styled.div`
 `;
 
 const Loading = keyframes`
-    0% {
-        width: 5rem;
-        right: 100%;
-    }
-    50% {
-        width: 15rem;
-        right: 100%;
-    }
-    50% {
-        width: 15rem;
-        right: 0%;
-    }
-    100% {
-        width: 0rem;
-        right: 0%;
-    }
+  0% {
+      width: 5rem;
+      right: 100%;
+  }
+  50% {
+      width: 15rem;
+      right: 100%;
+  }
+  50% {
+      width: 15rem;
+      right: 0%;
+  }
+  100% {
+      width: 0rem;
+      right: 0%;
+  }
 `;
 
 const Loader = styled.div`
@@ -64,6 +64,7 @@ const Loader = styled.div`
 `;
 
 const file = (await type()) === 'Windows_NT' ? 'yt-dlp.exe' : 'yt-dlp';
+export const YTDLPath = await join(await appConfigDir(), file);
 
 export function Updater({ onReady }: { onReady(): void }) {
   const [info, setInfo] = useState('buscando actualizaciones...');
@@ -92,10 +93,11 @@ export function Updater({ onReady }: { onReady(): void }) {
       .then(() => (updated = true))
       .catch(console.error);
 
-    edit({
-      lastYTDLCheck: Date.now(),
-      ...(updated ? { YTDLTag: res.data.tag_name } : {}),
-    });
+    if (updated)
+      edit({
+        lastYTDLCheck: Date.now(),
+        YTDLTag: res.data.tag_name,
+      });
     onReady();
   };
 

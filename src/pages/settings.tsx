@@ -5,10 +5,7 @@ import { FolderPicker } from '../components/FolderPicker';
 import { useSettings } from '../context/Settings';
 import { Dropdown } from '../components/Dropdown';
 import { Switch } from '../components/Switch';
-
-const Title = styled.h1`
-  font-size: 1.75rem;
-`;
+import { Title } from '../components/common';
 
 const Col = styled.div`
   display: flex;

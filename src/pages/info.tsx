@@ -53,10 +53,8 @@ export function Info() {
       </Data>
       <Subtitle>Dependencias - Hecho con</Subtitle>
       <Col>
-        {Object.entries(dependencies).map(([name, version]) => (
-          <Data key={name}>
-            {name}: {version}
-          </Data>
+        {Object.entries(dependencies).map(([name]) => (
+          <Data key={name}>{name}</Data>
         ))}
       </Col>
     </div>

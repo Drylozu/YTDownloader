@@ -8,12 +8,43 @@ use std::{
     fs::File,
     io::copy,
     path::Path,
+    process::{Command, Stdio},
     sync::{Arc, Mutex},
 };
 use tauri::{
     CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem,
     WindowEvent,
 };
+
+#[tauri::command]
+async fn search(file: String, quantity: String, query: String) -> Result<String, ()> {
+    let child = Command::new(file)
+        .arg(format!("ytsearch{}:{}", quantity, query))
+        .args([
+            "--skip-download",
+            "--print-json",
+            "--quiet",
+            "--no-warnings",
+        ])
+        .output()
+        .unwrap();
+
+    Ok(String::from_utf8(child.stdout).unwrap().trim().to_string())
+}
+
+#[tauri::command]
+async fn download(file: String, url: String, output: String) -> Result<(), ()> {
+    Command::new(file)
+        .arg(url)
+        .arg("-o")
+        .arg(output)
+        .stdout(Stdio::null())
+        .spawn()
+        .unwrap()
+        .wait();
+
+    Ok(())
+}
 
 #[tauri::command]
 fn free_space(dir: String) -> String {
@@ -40,10 +71,17 @@ fn main() {
         .add_item(show)
         .add_native_item(SystemTrayMenuItem::Separator)
         .add_item(close);
-    let tray = SystemTray::new().with_menu(menu);
+    let tray = SystemTray::new()
+        .with_menu(menu)
+        .with_tooltip("YT Downloader");
 
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![free_space, download_file])
+        .invoke_handler(tauri::generate_handler![
+            free_space,
+            download_file,
+            search,
+            download
+        ])
         .system_tray(tray)
         .setup(|app| {
             app.listen_global("background", move |event| {

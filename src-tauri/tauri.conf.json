@@ -37,7 +37,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "me.drylo.mp3",
+      "identifier": "ytdl.downloader",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
